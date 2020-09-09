@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'BatteryController@index')->name('battery.index');
+Route::get('/', 'BatteryController@index');
 Route::get('/battery', 'BatteryController@index')->name('battery.index');
 
 Route::get('/battery/{battery}/charging/create', 'ChargingController@create')->name('charging.create');
