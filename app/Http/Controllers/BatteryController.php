@@ -6,6 +6,7 @@ use App\Battery;
 use App\Charging;
 use App\User;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -30,8 +31,7 @@ class BatteryController extends Controller
         $user = auth()->user();
 
         return view('battery.index')
-            ->with('batteries', $user->orderedBatteries() ?? []);
-//            ->with('batteries', $user->batteries()->getResults() ?? []);
+            ->with('batteries', $user->orderedBatteries() ?? new Collection());
     }
 
     /**
@@ -79,8 +79,12 @@ class BatteryController extends Controller
      */
     public function show(Battery $battery): View
     {
-        return view('battery.show')
-        ->with('battery', $battery);
+        /** @var User $user */
+        $user = auth()->user();
+
+        return view('battery.index')
+            ->with('batteries', $user->orderedBatteries() ?? new Collection())
+            ->with('batteryFocused', $battery->id);
     }
 
     /**

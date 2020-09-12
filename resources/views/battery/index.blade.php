@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('head')
+    <script type="application/javascript">
+        $(document).ready(function () {
+            @isset($batteryFocused)
+                $( "#load-{{ $batteryFocused }}" ).focus();
+            @endisset
+        })
+    </script>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
