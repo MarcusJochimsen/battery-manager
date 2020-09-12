@@ -16,29 +16,38 @@ set('http_user', 'hosting145387');
 
 set('writable_mode', 'chmod');
 
-//set('bin/php', 'php');
-//set('bin/composer', 'composer');
-
 // Shared files/dirs between deploys
-add('shared_files', ['.env']);
-add('shared_dirs', []);
+//add('shared_files', []);
+//add('shared_dirs', []);
 
 // Writable dirs by web server
-add('writable_dirs', []);
+//add('writable_dirs', []);
 
 
 // Hosts
+
 host('batterymanager')
     ->set('deploy_path', '~/httpdocs/{{application}}');
 
 // Tasks
+
 task('build', function () {
     run('cd {{release_path}} && build');
 });
+
+task('wasfehlt', function () {
+    run('cd {{release_path}} && composer install');
+    run('cd {{release_path}} && php artisan route:clear');
+    run('cd {{release_path}} && php artisan config:clear');
+    run('cd {{release_path}} && php artisan cache:clear');
+});
+
+after('deploy', 'wasfehlt');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
+
 before('deploy:symlink', 'artisan:migrate');
 
