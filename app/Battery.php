@@ -7,6 +7,9 @@ use Exception;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property mixed id
+ */
 class Battery extends Model
 {
     /**
