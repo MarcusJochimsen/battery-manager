@@ -43,19 +43,17 @@ task('wasfehlt', function () {
 });
 
 task('startMaintenanceMode', function () {
-    run('cd {{release_path}} && sudo chown -R hosting145387:hosting145387 storage');
     run('cd {{release_path}} && php artisan down');
 });
 
 task('stopMaintenanceMode', function () {
     run('cd {{release_path}} && php artisan up');
-    run('cd {{release_path}} && sudo chown -R www-data:www-data storage');
 });
 
-after('deploy', 'wasfehlt');
-//after('deploy', 'stopMaintenanceMode');
-
 before('deploy', 'startMaintenanceMode');
+
+after('deploy', 'wasfehlt');
+after('deploy', 'stopMaintenanceMode');
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
