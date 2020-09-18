@@ -72,7 +72,7 @@ class Battery extends Model
      */
     public function lastChargingChangeHuman(): string
     {
-        return $this->lastChargingChange()->format('d.m.Y');
+        return $this->lastChargingChange()->isoFormat('LL');
     }
 
     /**
@@ -81,7 +81,7 @@ class Battery extends Model
      */
     public function lastChargingChangeHumanDiff(): string
     {
-        return $this->lastChargingChange()->diffForHumans(Carbon::now());
+        return $this->lastChargingChange()->diffForHumans();
     }
 
     /**
