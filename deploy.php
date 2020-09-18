@@ -55,6 +55,8 @@ task('stopMaintenanceMode', function () {
 after('deploy', 'wasfehlt');
 //after('deploy', 'stopMaintenanceMode');
 
+before('deploy', 'startMaintenanceMode');
+
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 after('deploy:failed', 'stopMaintenanceMode');
