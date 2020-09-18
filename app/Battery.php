@@ -72,6 +72,15 @@ class Battery extends Model
      */
     public function lastChargingChangeHuman(): string
     {
+        return $this->lastChargingChange()->format('d.m.Y');
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function lastChargingChangeHumanDiff(): string
+    {
         return $this->lastChargingChange()->diffForHumans(Carbon::now());
     }
 

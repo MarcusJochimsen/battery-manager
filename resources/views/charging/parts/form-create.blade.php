@@ -11,10 +11,10 @@
             </div>
             <input id="load-{{ $battery->id }}" type="number"
                    class="form-control @error('load') is-invalid @enderror" name="load"
-                   value="{{ old('load') }}" min="0" max="100" step="1" placeholder="Ladezustand" required autofocus>
+                   value="{{ old('load') }}" min="0" max="100" step="1" placeholder="aktueller Ladezustand" required autofocus>
             <div class="input-group-append">
                 <span class="input-group-text">%</span>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Speichern">
                     <i class="far fa-save"></i>
                 </button>
             </div>

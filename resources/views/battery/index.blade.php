@@ -6,6 +6,7 @@
             @isset($batteryFocused)
                 $( "#load-{{ $batteryFocused }}" ).focus();
             @endisset
+            $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
 @endsection
@@ -21,11 +22,11 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between {{ $battery->chargingStatusColor() }}">
                                     <span class="font-weight-bold">{{ $battery->name }}  <i class="{{ $battery->lastChargingChangeStatus() }} fas fa-exclamation-triangle"></i></span>
-                                    <span>{{ $battery->actualLoad() }}% <i>({{ $battery->lastChargingChangeHuman() }})</i></span>
+                                    <span>{{ $battery->actualLoad() }}% <i data-toggle="tooltip" data-placement="bottom" title="{{ $battery->lastChargingChangeHuman() }}">({{ $battery->lastChargingChangeHumanDiff() }})</i></span>
                                 </div>
                                 <div class="card-body">
                                     <div class="col-12 py-2 d-flex justify-content-between">
-                                        <div class="input-group p-0 col-5" title="Anzahl der Ladungen">
+                                        <div class="input-group p-0 col-5" data-toggle="tooltip" data-placement="bottom" title="Anzahl der Ladungen">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-charging-station"></i>
@@ -33,7 +34,7 @@
                                             </div>
                                             <input type="text" class="form-control" value="{{ $battery->charged() }}" disabled>
                                         </div>
-                                        <div class="input-group p-0 col-5" title="Anzahl der Ladezyklen">
+                                        <div class="input-group p-0 col-5" data-toggle="tooltip" data-placement="bottom" title="Anzahl der Ladezyklen">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="fas fa-battery-three-quarters"></i>
