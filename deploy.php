@@ -43,11 +43,13 @@ task('wasfehlt', function () {
 });
 
 task('startMaintenanceMode', function () {
-    run('cd {{release_path}} && php artisan down');
+//    if (has('previous_release')) {
+//        run('cd {{previous_release}} && php artisan down');
+//    }
 });
 
 task('stopMaintenanceMode', function () {
-    run('cd {{release_path}} && php artisan up');
+//    run('cd {{release_path}} && php artisan up');
 });
 
 before('deploy', 'startMaintenanceMode');
