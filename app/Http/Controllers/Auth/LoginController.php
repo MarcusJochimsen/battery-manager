@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Battery;
+use App\Charging;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +41,63 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, ?Authenticatable $user): void
+    {
+        if ($user !== null && $user->name === 'Testnutzer') {
+            // Todo In Seeder auslagern
+            $user->batteries()->delete();
+
+            $user->batteries()->save(
+                new Battery(['name' => 'Akku 1'])
+            )->chargings()->save(
+                new Charging([
+                    'load' => 30,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ])
+            );
+
+            $user->batteries()->save(
+                new Battery(['name' => 'Akku 2'])
+            )->chargings()->save(
+                new Charging([
+                    'load' => 100,
+                    'created_at' => Carbon::now()->subDays(2),
+                    'updated_at' => Carbon::now()->subDays(2),
+                ])
+            );
+
+            $user->batteries()->save(
+                new Battery(['name' => 'Akku 3'])
+            )->chargings()->save(
+                new Charging([
+                    'load' => 50,
+                    'created_at' => Carbon::now()->subDays(5),
+                    'updated_at' => Carbon::now()->subDays(5),
+                ])
+            );
+
+            $user->batteries()->save(
+                new Battery(['name' => 'Akku 4'])
+            )->chargings()->save(
+                new Charging([
+                    'load' => 100,
+                    'created_at' => Carbon::now()->subWeek(),
+                    'updated_at' => Carbon::now()->subWeek(),
+                ])
+            );
+
+            $user->batteries()->save(
+                new Battery(['name' => 'Akku 5'])
+            )->chargings()->save(
+                new Charging([
+                    'load' => 100,
+                    'created_at' => Carbon::now()->subWeeks(2),
+                    'updated_at' => Carbon::now()->subWeeks(2),
+                ])
+            );
+        }
     }
 }
