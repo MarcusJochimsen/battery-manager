@@ -59,6 +59,7 @@ class User extends Authenticatable
             ->orderByDesc(
                 Charging::select('load')
                     ->whereColumn('batteries.id', 'chargings.battery_id')
+                    ->orderByDesc('chargings.created_at')
                     ->limit(1)
             )
             ->orderBy(
