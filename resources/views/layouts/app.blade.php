@@ -84,6 +84,10 @@
                     <div class="d-flex justify-content-between py-1 flex-wrap">
                         <div class="footer-copyright p-1">© {{ date('Y') }} Copyright:
                             <a href="https://marcus-jochimsen.de/">Marcus Jochimsen</a>
+                            &nbsp;|&nbsp;
+                            <a href="https://github.com/MarcusJochimsen/battery-manager">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                         <div class="p-1">
                             <a href="{{ route('datenschutz') }}">Datenschutz</a>
