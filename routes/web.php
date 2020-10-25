@@ -25,9 +25,5 @@ Route::post('/battery/{battery}/charging', 'ChargingController@store')->name('ch
 
 Route::get('/sentry-error', 'SentryController@exception');
 
-Route::get('/impressum', function () {
-    return view('impressum');
-})->name('impressum');
-Route::get('/datenschutz', function () {
-    return view('datenschutz');
-})->name('datenschutz');
+Route::get('/datenschutz', 'StaticSiteController@datenschutz')->name('datenschutz');
+Route::get('/impressum', 'StaticSiteController@impressum')->name('impressum');
