@@ -24,3 +24,10 @@ Route::get('/battery/{battery}/charging/create', 'ChargingController@create')->n
 Route::post('/battery/{battery}/charging', 'ChargingController@store')->name('charging.store');
 
 Route::get('/sentry-error', 'SentryController@exception');
+
+Route::get('/impressum', function () {
+    return view('impressum');
+})->name('impressum');
+Route::get('/datenschutz', function () {
+    return view('datenschutz');
+})->name('datenschutz');
