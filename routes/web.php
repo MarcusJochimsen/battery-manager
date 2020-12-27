@@ -23,6 +23,11 @@ Route::get('/battery/{battery}', 'BatteryController@show')->name('battery.show')
 Route::get('/battery/{battery}/charging/create', 'ChargingController@create')->name('charging.create');
 Route::post('/battery/{battery}/charging', 'ChargingController@store')->name('charging.store');
 
+Route::get('/setting', 'SettingController@index')->name('setting.index');
+
+Route::get('/user', 'UserController@index')->name('user.index');
+Route::put('/user', 'UserController@update')->name('user.update');
+
 Route::get('/sentry-error', 'SentryController@exception');
 
 Route::get('/datenschutz', 'StaticSiteController@datenschutz')->name('datenschutz');
